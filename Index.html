@@ -13,6 +13,7 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
         }
 
         h1 {
@@ -23,6 +24,41 @@
 
         .mailbox-container {
             perspective: 1000px;
+            position: relative;
+        }
+
+        #flower-field {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 200px;
+            pointer-events: none;
+            overflow: visible;
+            z-index: 5;
+        }
+
+        .flower {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: url("https://i.imgur.com/1xHrM6k.png") no-repeat center/contain;
+            animation: floatUp 5s linear forwards;
+            opacity: 0.8;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100px) scale(0.8);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-300px) scale(1.2);
+                opacity: 0;
+            }
         }
 
         .mailbox {
@@ -111,48 +147,62 @@
 </head>
 <body>
 
-    <h1>Happy Father's Day!♥️</h1>
+<h1>Happy Father's Day!♥️</h1>
 
-    <div class="mailbox-container">
-        <div class="mailbox" id="mailbox">
-            <div class="lid"></div>
-            <div class="content">
-                <img src="https://i.imgur.com/SXFo9Ar.png" alt="Father's Day Image">
-
-                <p><strong>Dear Dad,</strong><br>
+<div class="mailbox-container">
+    <div id="flower-field"></div>
+    <div class="mailbox" id="mailbox">
+        <div class="lid"></div>
+        <div class="content">
+            <img src="https://i.imgur.com/SXFo9Ar.png" alt="Father's Day Image">
+            <p><strong>Dear Dad,</strong><br>
                 You are my hero, my guide, and my biggest supporter.<br>
-                Wishing you a joyful and love-filled Father's Day!♥️♥️</p>
-            </div>
+                Wishing you a joyful and love-filled Father's Day!♥️
+            </p>
         </div>
     </div>
+</div>
 
-    <div class="buttons">
-        <button onclick="playClick(); openMailbox()">Open</button>
-        <button onclick="playClick(); closeMailbox()">Close</button>
-    </div>
+<div class="buttons">
+    <button onclick="playClick(); openMailbox()">Open</button>
+    <button onclick="playClick(); closeMailbox()">Close</button>
+</div>
 
-    <audio id="clickSound" src="https://media.vocaroo.com/mp3/1joODXlO5tlt" preload="auto"></audio>
-    <audio id="openSound" src="https://media.vocaroo.com/mp3/1aSHEkn3qYyf" preload="auto"></audio>
-    <audio id="closeSound" src="https://www.soundjay.com/button/sounds/button-4.mp3" preload="auto"></audio>
+<audio id="clickSound" src="https://media.vocaroo.com/mp3/1joODXlO5tlt" preload="auto"></audio>
+<audio id="openSound" src="https://media.vocaroo.com/mp3/1aSHEkn3qYyf" preload="auto"></audio>
+<audio id="closeSound" src="https://www.soundjay.com/button/sounds/button-4.mp3" preload="auto"></audio>
 
-    <script>
-        function playClick() {
-            const click = document.getElementById("clickSound");
-            if (click) click.play();
+<script>
+    function playClick() {
+        const click = document.getElementById("clickSound");
+        if (click) click.play();
+    }
+
+    function openMailbox() {
+        const mailbox = document.getElementById("mailbox");
+        if (mailbox) mailbox.classList.add("open");
+        document.getElementById("openSound").play();
+        
+        // Launch multiple flowers
+        for (let i = 0; i < 12; i++) {
+            setTimeout(createFlower, i * 300);
         }
+    }
 
-        function openMailbox() {
-            const mailbox = document.getElementById("mailbox");
-            if (mailbox) mailbox.classList.add("open");
-            document.getElementById("openSound").play();
-        }
+    function closeMailbox() {
+        const mailbox = document.getElementById("mailbox");
+        if (mailbox) mailbox.classList.remove("open");
+        document.getElementById("closeSound").play();
+    }
 
-        function closeMailbox() {
-            const mailbox = document.getElementById("mailbox");
-            if (mailbox) mailbox.classList.remove("open");
-            document.getElementById("closeSound").play();
-        }
-    </script>
+    function createFlower() {
+        const flower = document.createElement("div");
+        flower.className = "flower";
+        flower.style.left = Math.random() * 270 + "px";
+        document.getElementById("flower-field").appendChild(flower);
+        setTimeout(() => flower.remove(), 5000);
+    }
+</script>
 
 </body>
 </html>
