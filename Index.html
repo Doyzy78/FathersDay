@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Developer Joker🃏</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        .mailbox-container {
+            perspective: 1000px;
+        }
+
+        .mailbox {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .lid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to right, #ff9ff3, #f368e0);
+            border-bottom: 5px solid #d980fa;
+            transform-origin: top;
+            transition: transform 0.6s ease-in-out;
+            z-index: 2;
+        }
+
+        .mailbox.open .lid {
+            transform: rotateX(160deg);
+        }
+
+        .content {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 1.2em;
+            color: #333;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .mailbox.open .content {
+            opacity: 1;
+        }
+
+        .content img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(to right, #48c6ef, #6f86d6);
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #6f86d6, #48c6ef);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Happy Father's Day!♥️</h1>
+
+    <div class="mailbox-container">
+        <div class="mailbox" id="mailbox">
+            <div class="lid"></div>
+            <div class="content">
+                <img src="https://i.imgur.com/SXFo9Ar.png" alt="Father's Day Image">
+
+                <p><strong>Dear Dad,</strong><br>
+                You are my hero, my guide, and my biggest supporter.<br>
+                Wishing you a joyful and love-filled Father's Day!♥️♥️</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button onclick="playClick(); openMailbox()">Open</button>
+        <button onclick="playClick(); closeMailbox()">Close</button>
+    </div>
+
+    <audio id="clickSound" src="https://media.vocaroo.com/mp3/1joODXlO5tlt" preload="auto"></audio>
+    <audio id="openSound" src="https://media.vocaroo.com/mp3/1aSHEkn3qYyf" preload="auto"></audio>
+    <audio id="closeSound" src="https://www.soundjay.com/button/sounds/button-4.mp3" preload="auto"></audio>
+
+    <script>
+        function playClick() {
+            const click = document.getElementById("clickSound");
+            if (click) click.play();
+        }
+
+        function openMailbox() {
+            const mailbox = document.getElementById("mailbox");
+            if (mailbox) mailbox.classList.add("open");
+            document.getElementById("openSound").play();
+        }
+
+        function closeMailbox() {
+            const mailbox = document.getElementById("mailbox");
+            if (mailbox) mailbox.classList.remove("open");
+            document.getElementById("closeSound").play();
+        }
+    </script>
+
+</body>
+</html>
