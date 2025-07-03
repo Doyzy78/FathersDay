@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Upload</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header><h1>🔐 Admin Upload</h1></header>
+  <form id="uploadForm">
+    <input type="text" id="name" placeholder="App Name" required><br>
+    <input type="text" id="version" placeholder="Version" required><br>
+    <input type="text" id="size" placeholder="Size (e.g. 13 MB)" required><br>
+    <input type="file" id="apkFile" accept=".apk" required><br>
+    <input type="file" id="iconFile" accept="image/*" required><br>
+    <button type="submit">Upload</button>
+  </form>
+  <script>
+    document.getElementById("uploadForm").onsubmit = function(e) {
+      e.preventDefault();
+      alert("This is a static uploader demo. Integrate with backend for real uploads.");
+    };
+  </script>
+</body>
+</html>
